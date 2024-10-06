@@ -6,6 +6,7 @@ This project is a coding practice repository designed to enhance programming ski
 
 - [Setup node](https://nodejs.org/en)
 - [Setup pnpm](https://pnpm.io/installation)
+- [Setup AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 
 Run initially and every time a dependency is changed
 
@@ -13,9 +14,27 @@ Run initially and every time a dependency is changed
 pnpm i
 ```
 
+When deploying to AWS, make sure you are logged in AWS CLI.
+
+```bash
+aws sso login
+```
+
+Run only once per AWS account
+
+```bash
+pnpm setup
+```
+
 esbuild is installed in the root package following a [recommendation from aws cdk](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_lambda_nodejs-readme.html#local-bundling).
 
 Vitest is installed in the root for better compatibility with vs code plugin.
+
+## Deploy
+
+```bash
+pnpm run deploy
+```
 
 ## Test
 
