@@ -2,6 +2,16 @@
 
 This project is a coding practice repository designed to enhance programming skills.
 
+## Stack
+
+The setup is going to be an updated and modified version of my sample project https://github.com/fcostarodrigo/sample-project.
+
+![Stack diagram](stack.drawio.svg)
+
+## Wire frame
+
+![Wire frame diagram](wireFrame.drawio.svg)
+
 ## Domain
 
 ![Domain model diagram](domain.drawio.svg)
