@@ -4,6 +4,8 @@ nav {
 
 main {
   padding: 2rem;
+  background-color: rgb(252, 252, 252);
+  flex-grow: 1;
 }
 
 main h1 {
