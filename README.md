@@ -1,6 +1,6 @@
 # Bots
 
-This project is a coding practice repository designed to enhance programming skills.
+This project is a coding practice repository.
 
 ## Setup
 
@@ -8,7 +8,7 @@ This project is a coding practice repository designed to enhance programming ski
 - [Setup pnpm](https://pnpm.io/installation)
 - [Setup AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 
-Run initially and every time a dependency is changed
+Install dependencies.
 
 ```bash
 pnpm i
@@ -31,6 +31,10 @@ esbuild is installed in the root package following a [recommendation from aws cd
 Vitest is installed in the root for better compatibility with vs code plugin.
 
 ## Deploy
+
+Deploy in the default region on the logged AWS account.
+
+The URL of the application will be in the output of the command at the end.
 
 ```bash
 pnpm run deploy
