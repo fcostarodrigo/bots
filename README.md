@@ -2,6 +2,27 @@
 
 This project is a coding practice repository designed to enhance programming skills.
 
+## Setup
+
+- [Setup node](https://nodejs.org/en)
+- [Setup pnpm](https://pnpm.io/installation)
+
+Run initially and every time a dependency is changed
+
+```bash
+pnpm i
+```
+
+esbuild is installed in the root package following a [recommendation from aws cdk](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_lambda_nodejs-readme.html#local-bundling).
+
+Vitest is installed in the root for better compatibility with vs code plugin.
+
+## Test
+
+```bash
+pnpm test
+```
+
 ## Stack
 
 The setup is going to be an updated and modified version of my sample project https://github.com/fcostarodrigo/sample-project.

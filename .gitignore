@@ -1,1 +1,34 @@
-node_modules/
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+# TypeScript
+tsconfig.tsbuildinfo
+
+node_modules
+dist
+dist-ssr
+*.local
+dev-dist
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/snippets.code-snippets
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

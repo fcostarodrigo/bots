@@ -76,9 +76,7 @@ const writeBots = () => {
 const writeWorkers = () => {
   const workers = faker.helpers.multiple(createWorker, { count: 12 });
   const jsonString = JSON.stringify(workers, null, 2);
-  fs.writeFile("workers.json", jsonString, () =>
-    console.log("Workers Written")
-  );
+  fs.writeFile("workers.json", jsonString, () => console.log("Workers Written"));
 };
 
 const writeLogs = () => {
