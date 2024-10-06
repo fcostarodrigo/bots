@@ -1,3 +1,5 @@
+import Home from "./home/home";
+
 export default function App() {
-  return <h1>Bots</h1>;
+  return <Home />;
 }

@@ -7,5 +7,5 @@
     "source.fixAll": "explicit"
   },
   "typescript.preferences.autoImportFileExcludePatterns": ["node/test.d.ts"],
-  "cSpell.words": ["bauru", "tseslint", "typecheck"]
+  "cSpell.words": ["bauru", "tanstack", "tseslint", "typecheck"]
 }

@@ -12,7 +12,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  { ignores: ["dist", "src/routeTree.gen.ts"] },
   eslint.configs.recommended,
   ...tseslint.configs.stylistic,
   ...tseslint.configs.recommended,
@@ -24,7 +24,12 @@ export default tseslint.config(
   },
   eslintPluginUnicorn.configs["flat/all"],
   {
-    rules: { "unicorn/filename-case": "off", "unicorn/prevent-abbreviations": "off", "unicorn/no-null": "off" },
+    rules: {
+      "unicorn/filename-case": "off",
+      "unicorn/prevent-abbreviations": "off",
+      "unicorn/no-null": "off",
+      "unicorn/no-keyword-prefix": "off",
+    },
   },
   ...pluginQuery.configs["flat/recommended"],
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
