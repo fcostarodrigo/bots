@@ -7,6 +7,7 @@ import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
+  { ignores: ["cdk.out"] },
   eslint.configs.recommended,
   ...tseslint.configs.stylistic,
   ...tseslint.configs.recommended,
