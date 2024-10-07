@@ -1,3 +1,9 @@
 export { addBotApi } from "./apis/addBot.js";
+export { addLogApi } from "./apis/addLog.js";
+export { addWorkerApi } from "./apis/addWorker.js";
 export { getBotsApi } from "./apis/getBots.js";
+export { getLogsApi } from "./apis/getLogs.js";
+export { getWorkersApi } from "./apis/getWorkers.js";
 export { updateBotApi } from "./apis/updateBot.js";
+export { updateLogApi } from "./apis/updateLog.js";
+export { updateWorkerApi } from "./apis/updateWorker.js";
