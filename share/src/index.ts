@@ -11,6 +11,15 @@ export {
   type BotStatus,
 } from "./domain/bot.js";
 export {
+  getLogFormMock,
+  getLogMock,
+  logFormSchema,
+  logSchema,
+  logsSchema,
+  type Log,
+  type LogForm,
+} from "./domain/log.js";
+export {
   getWorkerFormMock,
   getWorkerMock,
   workerFormSchema,
