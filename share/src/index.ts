@@ -10,6 +10,15 @@ export {
   type BotForm,
   type BotStatus,
 } from "./domain/bot.js";
+export {
+  getWorkerFormMock,
+  getWorkerMock,
+  workerFormSchema,
+  workerSchema,
+  workersSchema,
+  type Worker,
+  type WorkerForm,
+} from "./domain/worker.js";
 export { errorSerializer } from "./errorSerializer.js";
 export { fullRequest, request, type RequestMethod } from "./request.js";
 export { formatPath, formatUrl, parseUrl } from "./url.js";
