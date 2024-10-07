@@ -11,6 +11,7 @@ import {
   workerFormSchema,
   workerSchema,
 } from "share";
+import { z } from "zod";
 
 const defaultDelay = 3000;
 
@@ -33,6 +34,13 @@ export const handlers = [
     return HttpResponse.json(bots);
   }),
 
+  http.get("/api/bots/:botId/workers", async ({ params }) => {
+    const botId = z.string().parse(params.botId);
+
+    await delay(defaultDelay);
+    return HttpResponse.json(workers.filter((worker) => worker.botId === botId));
+  }),
+
   http.get("/api/workers", async () => {
     await delay(defaultDelay);
     return HttpResponse.json(workers);
@@ -41,6 +49,20 @@ export const handlers = [
   http.get("/api/logs", async () => {
     await delay(defaultDelay);
     return HttpResponse.json(logs);
+  }),
+
+  http.get("/api/bots/:botId/logs", async ({ params }) => {
+    const botId = z.string().parse(params.botId);
+
+    await delay(defaultDelay);
+    return HttpResponse.json(logs.filter((log) => "botId" in log && log.botId === botId));
+  }),
+
+  http.get("/api/workers/:workId/logs", async ({ params }) => {
+    const workId = z.string().parse(params.workId);
+
+    await delay(defaultDelay);
+    return HttpResponse.json(logs.filter((log) => "workId" in log && log.workId === workId));
   }),
 
   http.post("/api/bots", async ({ request }) => {
