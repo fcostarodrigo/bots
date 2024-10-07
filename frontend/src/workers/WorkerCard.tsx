@@ -2,6 +2,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Button, CardActions, CardHeader } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Worker, WorkerForm } from "share";
 import { useBots } from "../bots/botsApi";
@@ -39,14 +40,11 @@ export function WorkerCard(props: { worker: Worker }) {
         <Button variant="outlined" endIcon={<EditIcon />} onClick={handleEditClick}>
           Edit
         </Button>
+        <Link className="cardLink" search={{ workerId: props.worker.workerId }} to={`/logs`}>
+          Logs
+        </Link>
       </CardActions>
-      <WorkerDialog
-        onSubmit={handleSubmit}
-        onClose={handleClose}
-        open={open}
-        worker={props.worker}
-        isPending={updateWorkerMutation.isPending}
-      />
+      <WorkerDialog onSubmit={handleSubmit} onClose={handleClose} open={open} worker={props.worker} />
     </Card>
   );
 }

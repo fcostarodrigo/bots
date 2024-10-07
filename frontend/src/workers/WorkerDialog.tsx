@@ -20,7 +20,6 @@ interface WorkerDialogProps {
   onClose: () => void;
   onSubmit: (workerForm: WorkerForm) => void;
   worker?: Worker;
-  isPending?: boolean;
 }
 
 export function WorkerDialog(props: WorkerDialogProps) {
@@ -75,7 +74,7 @@ export function WorkerDialog(props: WorkerDialogProps) {
           fullWidth
         />
 
-        <FormControl fullWidth>
+        <FormControl fullWidth style={{ marginTop: "1rem" }}>
           <InputLabel id="botIdSelectLabel">Bot</InputLabel>
           <Select onChange={handleChange} labelId="botIdSelectLabel" name="botId" id="botId" value={botId} label="Bot">
             {bots.map((bot) => (
@@ -88,9 +87,7 @@ export function WorkerDialog(props: WorkerDialogProps) {
       </DialogContent>
       <DialogActions>
         <Button onClick={props.onClose}>Cancel</Button>
-        <Button disabled={props.isPending} type="submit">
-          Save
-        </Button>
+        <Button type="submit">Save</Button>
       </DialogActions>
     </Dialog>
   );

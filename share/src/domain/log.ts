@@ -25,7 +25,7 @@ export const logSchema = z.union([
 export const logsSchema = z.array(logSchema);
 
 export function getLogFormMock(botId?: string, workerId?: string): LogForm {
-  const message = faker.internet.userName();
+  const message = faker.lorem.sentence();
 
   if (botId) {
     return { message, botId };

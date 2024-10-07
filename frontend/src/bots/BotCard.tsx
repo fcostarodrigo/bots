@@ -8,7 +8,6 @@ import CardContent from "@mui/material/CardContent";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Bot, BotForm, botStatusSchema } from "share";
-import "./BotCard.css";
 import { BotDialog } from "./BotDialog";
 import { useUpdateBot } from "./botsApi";
 
@@ -71,6 +70,9 @@ export function BotCard(props: { bot: Bot }) {
         </Button>
         <Link className="cardLink" search={{ botId: props.bot.botId }} to={`/workers`}>
           Workers
+        </Link>
+        <Link className="cardLink" search={{ botId: props.bot.botId }} to={`/logs`}>
+          Logs
         </Link>
       </CardActions>
       <BotDialog onSubmit={handleSubmit} onClose={handleClose} open={open} bot={props.bot} />

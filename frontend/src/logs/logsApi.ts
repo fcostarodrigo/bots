@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { Bot, Log, LogForm, logsSchema, request, Worker } from "share";
+import { Log, LogForm, logsSchema, request } from "share";
 
 const queryKey = ["logs"];
 
@@ -13,13 +13,8 @@ export function useAddLog() {
         method: "POST",
         body: logForm,
       }),
-    onSettled: async (_, __, logForm) => {
-      return await Promise.all([
-        queryClient.invalidateQueries({
-          queryKey: [...queryKey, "botId" in logForm ? logForm.botId : logForm.workerId],
-        }),
-        queryClient.invalidateQueries({ queryKey }),
-      ]);
+    onSettled: async () => {
+      return await queryClient.invalidateQueries({ queryKey });
     },
   });
 
@@ -36,11 +31,18 @@ export function useUpdateLog() {
         method: "PUT",
         body: log,
       }),
-    onSettled: async (_, __, log) => {
-      return await Promise.all([
-        queryClient.invalidateQueries({ queryKey }),
-        queryClient.invalidateQueries({ queryKey: [...queryKey, "botId" in log ? log.botId : log.workerId] }),
-      ]);
+    onMutate: async (updateLog) => {
+      await queryClient.cancelQueries({ queryKey });
+      const oldLogs = queryClient.getQueryData<Log[]>(queryKey) ?? [];
+      const newLogs = oldLogs.map((log) => (log.logId === updateLog.logId ? updateLog : log));
+      queryClient.setQueryData(queryKey, newLogs);
+      return { oldLogs };
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData(queryKey, context?.oldLogs);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey });
     },
   });
 
@@ -53,32 +55,6 @@ export function useLogs() {
     queryFn: () =>
       request({
         url: "/api/logs",
-        method: "GET",
-      }),
-  });
-
-  return logsSchema.parse(data);
-}
-
-export function useBotLogs(bot: Bot) {
-  const { data } = useSuspenseQuery({
-    queryKey: [...queryKey, bot.botId],
-    queryFn: () =>
-      request({
-        url: `/api/bot/${bot.botId}/logs`,
-        method: "GET",
-      }),
-  });
-
-  return logsSchema.parse(data);
-}
-
-export function useWorkerLogs(worker: Worker) {
-  const { data } = useSuspenseQuery({
-    queryKey: [...queryKey, worker.workerId],
-    queryFn: () =>
-      request({
-        url: `/api/workers/${worker.workerId}/logs`,
         method: "GET",
       }),
   });
