@@ -1,10 +1,10 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import Bots from "../bots/bots";
+import { BotsPage } from "../bots/BotsPage";
 
 export const Route = createLazyFileRoute("/")({
   component: Index,
 });
 
 function Index() {
-  return <Bots />;
+  return <BotsPage />;
 }

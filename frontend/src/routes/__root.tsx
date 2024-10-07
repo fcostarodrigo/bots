@@ -1,11 +1,11 @@
 import { createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import Home from "../home/home";
+import { App } from "../App";
 
 export const Route = createRootRoute({
   component: () => (
     <>
-      <Home />
+      <App />
       <TanStackRouterDevtools />
     </>
   ),

@@ -11,7 +11,7 @@ export class BotsStack extends cdk.Stack {
 
     const region = this.region;
 
-    const { apiUrl, getBotsLambda } = makeApis(this, region);
+    const { apiUrl, getBotsLambda, addBotLambda, updateBotLambda } = makeApis(this, region);
 
     const botsTable = new dynamodb.Table(this, "botsTable", {
       partitionKey: {
@@ -22,6 +22,8 @@ export class BotsStack extends cdk.Stack {
     });
 
     botsTable.grantReadWriteData(getBotsLambda);
+    botsTable.grantReadWriteData(addBotLambda);
+    botsTable.grantReadWriteData(updateBotLambda);
 
     makeCdn(this, apiUrl);
   }

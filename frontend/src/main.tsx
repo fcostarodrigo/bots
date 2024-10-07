@@ -1,15 +1,21 @@
+import { CssBaseline } from "@mui/material";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { setupWorker } from "msw/browser";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-
-// Import the generated route tree
-import { CssBaseline } from "@mui/material";
+import "./index.css";
+import { handlers } from "./mockServer/handlers";
 import { routeTree } from "./routeTree.gen";
 
-// Create a new router instance
+if (process.env.NODE_ENV === "development") {
+  const worker = setupWorker(...handlers);
+  await worker.start({ onUnhandledRequest: "bypass" });
+}
+
 const router = createRouter({ routeTree });
 
-// Register the router instance for type safety
 declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
@@ -18,11 +24,16 @@ declare module "@tanstack/react-router" {
 
 const root = document.querySelector("#root");
 
+const queryClient = new QueryClient();
+
 if (root) {
   createRoot(root).render(
     <StrictMode>
       <CssBaseline enableColorScheme />
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </StrictMode>,
   );
 } else {
