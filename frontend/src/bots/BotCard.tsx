@@ -5,8 +5,10 @@ import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import { Button, CardActions, CardHeader, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Bot, BotForm, botStatusSchema } from "share";
+import "./BotCard.css";
 import { BotDialog } from "./BotDialog";
 import { useUpdateBot } from "./botsApi";
 
@@ -67,6 +69,9 @@ export function BotCard(props: { bot: Bot }) {
         <Button variant="outlined" endIcon={<EditIcon />} onClick={handleEditClick}>
           Edit
         </Button>
+        <Link className="cardLink" search={{ botId: props.bot.botId }} to={`/workers`}>
+          Workers
+        </Link>
       </CardActions>
       <BotDialog onSubmit={handleSubmit} onClose={handleClose} open={open} bot={props.bot} />
     </Card>

@@ -11,34 +11,22 @@ import {
   workerFormSchema,
   workerSchema,
 } from "share";
-import { z } from "zod";
 
 const defaultDelay = 3000;
 
 let bots = faker.helpers.multiple(getBotMock, { count: 3 });
 
-let workers = [
-  ...bots.flatMap((bot) => faker.helpers.multiple(() => getWorkerMock(bot.botId), { count: 2 })),
-  ...faker.helpers.multiple(() => getWorkerMock(), { count: 2 }),
-];
+let workers = bots.flatMap((bot) => faker.helpers.multiple(() => getWorkerMock(bot.botId), { count: 2 }));
 
 let logs = [
   ...bots.flatMap((bot) => faker.helpers.multiple(() => getLogMock(bot.botId), { count: 2 })),
   ...workers.flatMap((worker) => faker.helpers.multiple(() => getLogMock(undefined, worker.workerId), { count: 2 })),
-  ...faker.helpers.multiple(() => getLogMock(), { count: 2 }),
 ];
 
 export const handlers = [
   http.get("/api/bots", async () => {
     await delay(defaultDelay);
     return HttpResponse.json(bots);
-  }),
-
-  http.get("/api/bots/:botId/workers", async ({ params }) => {
-    const botId = z.string().parse(params.botId);
-
-    await delay(defaultDelay);
-    return HttpResponse.json(workers.filter((worker) => worker.botId === botId));
   }),
 
   http.get("/api/workers", async () => {
@@ -51,20 +39,6 @@ export const handlers = [
     return HttpResponse.json(logs);
   }),
 
-  http.get("/api/bots/:botId/logs", async ({ params }) => {
-    const botId = z.string().parse(params.botId);
-
-    await delay(defaultDelay);
-    return HttpResponse.json(logs.filter((log) => "botId" in log && log.botId === botId));
-  }),
-
-  http.get("/api/workers/:workId/logs", async ({ params }) => {
-    const workId = z.string().parse(params.workId);
-
-    await delay(defaultDelay);
-    return HttpResponse.json(logs.filter((log) => "workId" in log && log.workId === workId));
-  }),
-
   http.post("/api/bots", async ({ request }) => {
     const botForm = botFormSchema.parse(await request.json());
     const bot = { ...getBotMock(), ...botForm, status: "DISABLED" as const };
@@ -75,7 +49,7 @@ export const handlers = [
     return HttpResponse.json(bot);
   }),
 
-  http.post("/api/worker", async ({ request }) => {
+  http.post("/api/workers", async ({ request }) => {
     const workerForm = workerFormSchema.parse(await request.json());
     const worker = { ...getWorkerMock(), ...workerForm };
 
@@ -85,7 +59,7 @@ export const handlers = [
     return HttpResponse.json(worker);
   }),
 
-  http.post("/api/log", async ({ request }) => {
+  http.post("/api/logs", async ({ request }) => {
     const logForm = logFormSchema.parse(await request.json());
     const log = { ...getLogMock(), ...logForm };
 

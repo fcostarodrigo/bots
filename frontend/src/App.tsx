@@ -11,8 +11,6 @@ export function App() {
       style={{
         display: "flex",
         minHeight: "100vh",
-        width: "100vw",
-        overflowX: "hidden",
       }}
     >
       <nav

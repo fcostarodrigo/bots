@@ -5,6 +5,7 @@ import { BotCard } from "./BotCard";
 import { useUpdateBot } from "./botsApi";
 
 vi.mock("./botsApi");
+vi.mock("@tanstack/react-router");
 
 const useUpdateBotMock = vi.mocked(useUpdateBot);
 

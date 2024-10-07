@@ -32,6 +32,14 @@ esbuild is installed in the root package following a [recommendation from aws cd
 
 Vitest is installed in the root for better compatibility with vs code plugin.
 
+## Run locally
+
+To run locally with a mock server, use:
+
+```bash
+pnpm run start
+```
+
 ## Deploy
 
 Deploy in the default region on the logged AWS account.

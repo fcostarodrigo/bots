@@ -26,7 +26,7 @@ export const botsSchema = z.array(botSchema);
 
 export function getBotFormMock(): BotForm {
   return {
-    name: faker.internet.userName(),
+    name: `Bot ${faker.person.firstName()}`,
     description: faker.lorem.sentence(),
   };
 }

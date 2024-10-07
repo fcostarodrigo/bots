@@ -21,7 +21,7 @@ export const workersSchema = z.array(workerSchema);
 
 export function getWorkerFormMock(botId?: string): WorkerForm {
   return {
-    name: faker.internet.userName(),
+    name: `Worker ${faker.person.firstName()}`,
     description: faker.lorem.sentence(),
     botId: botId ?? faker.string.uuid(),
   };
